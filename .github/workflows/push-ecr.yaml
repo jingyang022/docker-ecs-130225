@@ -41,5 +41,8 @@ jobs:
       uses: snyk/actions/docker@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ${{ vars.REPO_NAME }}
+        IMAGE_TAG: ${{ github.sha }}
       with:
-        image: $ECR_REPOSITORY:$IMAGE_TAG
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
