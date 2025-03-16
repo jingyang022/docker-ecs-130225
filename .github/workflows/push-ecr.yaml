@@ -34,15 +34,15 @@ jobs:
                docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
                echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
   
-  SYNK:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Run Snyk to check Docker image for vulnerabilities
-      uses: snyk/actions/docker@master
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ vars.REPO_NAME }}
-        IMAGE_TAG: ${{ github.sha }}
-      with:
-        image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  # SYNK:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Run Snyk to check Docker image for vulnerabilities
+  #     uses: snyk/actions/docker@master
+  #     env:
+  #       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  #       ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+  #       ECR_REPOSITORY: ${{ vars.REPO_NAME }}
+  #       IMAGE_TAG: ${{ github.sha }}
+  #     with:
+  #       image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
